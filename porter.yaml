@@ -1,5 +1,0 @@
-apps:
-  web-1: 
-    run: launcher node index.js
-  web-2:
-    run: launcher node index.js
