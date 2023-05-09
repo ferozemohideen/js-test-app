@@ -1,0 +1,3 @@
+apps:
+  web:
+    run: launcher node index.js
