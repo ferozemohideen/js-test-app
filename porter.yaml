@@ -4,5 +4,3 @@ apps:
   web-2:
     run: launcher node index.js
 
-release:
-  run: echo "hello from porter.yaml"
