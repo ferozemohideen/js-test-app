@@ -1,4 +1,0 @@
-apps:
-  web-1: 
-    run: launcher node index.js
-
