@@ -1,6 +1,6 @@
 apps:
   web-1: 
-    run: launcher node index.js
+    run: node index.js
 
 release:
   run: echo 'hello world'
