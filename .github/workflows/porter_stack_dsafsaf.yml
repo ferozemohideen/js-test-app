@@ -24,3 +24,4 @@ jobs:
         PORTER_STACK_NAME: dsafsaf
         PORTER_TAG: ${{ steps.vars.outputs.sha_short }}
         PORTER_TOKEN: ${{ secrets.PORTER_STACK_2_2 }}
+
