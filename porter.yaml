@@ -1,6 +1,3 @@
 apps:
   web-1: 
     run: launcher node index.js
-  job-1: 
-    type: job
-    run: launcher node index.js
