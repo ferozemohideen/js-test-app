@@ -6,4 +6,4 @@ do
     sleep 1
 done
 
-exit 1  # Exit with a non-zero exit code
+exit 0 
