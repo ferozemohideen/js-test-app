@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for ((i=1; i<=120; i++))
+for ((i=1; i<=100; i++))
 do
     echo $i
     sleep 1
