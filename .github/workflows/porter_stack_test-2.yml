@@ -3,7 +3,7 @@
 on:
   push:
     branches:
-    - feroze
+    - test
 name: Deploy to porter_stack_test-2
 jobs:
   porter-deploy:
