@@ -16,11 +16,11 @@ jobs:
       timeout-minutes: 30
       uses: porter-dev/porter-cli-action@v0.1.0
       with:
-        command: apply -f ./porter.yaml
+        command: apply -f porter.yaml
       env:
         PORTER_CLUSTER: "1"
         PORTER_HOST: https://aebf-160-72-72-58.ngrok-free.app
         PORTER_PROJECT: "10"
         PORTER_STACK_NAME: test-delete-2
         PORTER_TAG: ${{ steps.vars.outputs.sha_short }}
-        PORTER_TOKEN: ${{ secrets.PORTER_STACK_10_1 }}
+        PORTER_TOKEN: ${{ secrets. }}
