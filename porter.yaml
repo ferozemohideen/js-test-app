@@ -1,95 +1,49 @@
-apps:
-  example-job:
-    type: job
-    run: echo 'hello world'
-    config:
-      allowConcurrent: true
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-      schedule:
-        enabled: true
-        value: '*/10 * * * *'
-      paused: true
-      cloudsql:
-        enabled: false
-        connectionName: ''
-        dbPort: '5432'
-        serviceAccountJSON: ''
-  example-wkr:
-    type: worker
-    run: "echo 'work'"
-    config:
-      replicaCount: '1'
-      container:
-        port: '80'
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-      autoscaling:
-        enabled: false
-        minReplicas: '1'
-        maxReplicas: '10'
-        targetCPUUtilizationPercentage: '50'
-        targetMemoryUtilizationPercentage: '50'
-      cloudsql:
-        enabled: false
-        connectionName: ''
-        dbPort: '5432'
-        serviceAccountJSON: ''
-  example-web:
-    type: web
-    run: node index.js
-    config:
-      replicaCount: '0'
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-      container:
-        port: '8080'
-      autoscaling:
-        enabled: true
-        minReplicas: '1'
-        maxReplicas: '3'
-        targetCPUUtilizationPercentage: '60'
-        targetMemoryUtilizationPercentage: '60'
-      ingress:
-        enabled: true
-        custom_domain: true
-        hosts:
-          - test1.example.com
-          - test2.example.com
-        porter_hosts: []
-        annotations:
-          kubernetes.io/test: nginx
-      service:
-        port: '3000'
-      health:
-        startupProbe:
-          enabled: false
-          failureThreshold: '3'
-          path: /startupz
-          periodSeconds: '5'
-        readinessProbe:
-          enabled: true
-          failureThreshold: '3'
-          path: /healthz
-          initialDelaySeconds: '0'
-        livenessProbe:
-          enabled: true
-          failureThreshold: '3'
-          path: /livez
-          periodSeconds: '5'
-      cloudsql:
-        enabled: false
-        connectionName: ''
-        dbPort: '5432'
-        serviceAccountJSON: ''
-release:
+---
+version: v2
+name: "js-test-app" # require app name in definition going forward
+services:
+	example-web:
+		type: web # optional if suffix -web is used
+		run: node index.js
+		port: 8080 # no need to nest this in container
+		cpuCores: 0.1
+		ramMegabytes: 256
+		autoscaling:
+			enabled: true 
+      minInstances: 1
+      maxInstances: 3
+      memoryThresholdPercent: 60 # optional if targetCPUPercent is set
+      cpuThresholdPercent: 60 # optional if targetMemory is set
+    private: false # if set to true
+		domains: # no need for custom_domain flag, just set this
+		- name: test1.example.com
+		- name: test2.example.com
+		healthCheck:
+			enabled: true
+			httpPath: /healthz
+
+	example-wkr:
+		type: worker
+		run: echo 'work'
+		port: 80
+		cpuCores: 0.1
+		ramMegabytes: 256
+		instances: 1
+
+	# autoscaling can also be set, but instances would be ignored
+	example-job:
+		type: job
+		run: echo 'hello world'
+		allowConcurrent: true # job specific setting
+		cpuCores: 0.1
+		ramMegabytes: 256
+		cron: "*/10 * * * *" # optional, job specific
+
+predeploy:
+	type: job
   run: ls
+	# other job fields can be set, cron and allowConcurrent ignored
+
 env:
-  PORT: '8080'
-  NODE_ENV: 'production'
+	PORT: 8080
+	NODE_ENV: production
