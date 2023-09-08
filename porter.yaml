@@ -5,7 +5,7 @@ services:
   example-web:
     type: web # optional if suffix -web is used
     run: node index.js
-    port: 8080 # no need to nest this in container
+    port: 3000 # no need to nest this in container
     cpuCores: 0.1
     ramMegabytes: 256
     autoscaling:
