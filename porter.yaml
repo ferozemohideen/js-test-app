@@ -1,6 +1,5 @@
 ---
 version: v2
-name: "test-7" # require app name in definition going forward
 services:
   example-web:
     type: web # optional if suffix -web is used
