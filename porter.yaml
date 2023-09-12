@@ -40,7 +40,7 @@ services:
 
 predeploy:
   type: job
-  run: ls
+  run: bash countdown.sh
   # other job fields can be set, cron and allowConcurrent ignored
 
 env:
