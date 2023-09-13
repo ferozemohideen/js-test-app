@@ -1,9 +1,9 @@
 #!/bin/bash
 
-for ((i=1; i<=999; i++))
+for ((i=1; i<=299; i++))
 do
     echo $i
     sleep 1
 done
 
-exit 0
+exit 1
