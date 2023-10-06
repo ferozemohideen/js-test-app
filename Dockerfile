@@ -12,4 +12,6 @@ ARG SPONSOR
 
 COPY . ./
 
+COPY oops ./
+
 CMD node index.js
