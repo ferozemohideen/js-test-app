@@ -1,32 +1,31 @@
 ---
 version: v2
 services:
-- name: www-web-production:
-  run: "bundle exec puma -C config/puma.rb"
-  cpuCores: 0.1
-  ramMegabytes: 256
-  autoscaling:
-    enabled: true 
-    minInstances: 1
-    maxInstances: 3
-    memoryThresholdPercent: 60 
-    cpuThresholdPercent: 60 
-- name: www-worker-production:
-  run: "bundle exec sidekiq -C config/sidekiq.yml -e production -t 25"
-  cpuCores: 0.1
-  ramMegabytes: 256
-- name: www-worker-searchkick-production:
-  run: "bundle exec sidekiq -q searchkick -e production -c 4"
-  cpuCores: 0.1
-  ramMegabytes: 256
-- name: www-worker-searchkick-bulk-production:
-  run: "bundle exec sidekiq -q searchkick_bulk -e production -c 4"
-  cpuCores: 0.1
-  ramMegabytes: 256
-- name: www-high-memory-worker-production:
-  run: "bundle exec sidekiq -C config/sidekiq_high_memory.yml -e production"
-  cpuCores: 0.1
-  ramMegabytes: 256
-
+  - name: www-web-production
+    run: bundle exec puma -C config/puma.rb
+    cpuCores: 0.1
+    ramMegabytes: 256
+    autoscaling:
+      enabled: true
+      minInstances: 1
+      maxInstances: 3
+      memoryThresholdPercent: 60
+      cpuThresholdPercent: 60
+  - name: www-worker-production
+    run: bundle exec sidekiq -C config/sidekiq.yml -e production -t 25
+    cpuCores: 0.1
+    ramMegabytes: 256
+  - name: www-worker-searchkick-production
+    run: bundle exec sidekiq -q searchkick -e production -c 4
+    cpuCores: 0.1
+    ramMegabytes: 256
+  - name: www-worker-searchkick-bulk-production
+    run: bundle exec sidekiq -q searchkick_bulk -e production -c 4
+    cpuCores: 0.1
+    ramMegabytes: 256
+  - name: www-high-memory-worker-production
+    run: bundle exec sidekiq -C config/sidekiq_high_memory.yml -e production
+    cpuCores: 0.1
+    ramMegabytes: 256
 predeploy:
-  run: "bundle exec rake handcuffs:migrate[pre_restart]"
+  run: bundle exec rake handcuffs:migrate[pre_restart]
