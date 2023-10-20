@@ -1,7 +1,7 @@
 ---
 version: v2
 services:
-- name: example-web:
+- name: example-web
   type: web # optional if suffix -web is used
   run: node index.js
   port: 3000 # no need to nest this in container
@@ -20,7 +20,7 @@ services:
   healthCheck:
     enabled: false
     httpPath: /healthz
-- name: example-wkr:
+- name: example-wkr
   type: worker
   run: echo 'work'
   port: 80
@@ -29,7 +29,7 @@ services:
   instances: 1
 
   # autoscaling can also be set, but instances would be ignored
-- name: example-job:
+- name: example-job
   type: job
   run: echo 'hello world'
   allowConcurrent: true # job specific setting
