@@ -26,8 +26,6 @@ services:
   port: 80
   cpuCores: 0.1
   ramMegabytes: 256
-  instances: 1
-
   # autoscaling can also be set, but instances would be ignored
 - name: example-job
   type: job
