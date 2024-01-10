@@ -1,4 +1,4 @@
 services:
-  - name: web
-    type: web
-    run: launcher node index.js
+- name: web
+  type: web
+  run: launcher node index.js
