@@ -3,4 +3,4 @@ services:
   - name: web
     type: web
     run: launcher node index.js
-    instances: 2
+    instances: 0
