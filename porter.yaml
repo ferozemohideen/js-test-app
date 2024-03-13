@@ -3,6 +3,4 @@ services:
   - name: web
     type: web
     run: launcher node index.js
-
-predeploy:
-  run: echo "hello"
+    instances: 1
